@@ -1,3 +1,6 @@
+Back-end do projeto feito em Nestjs com banco de dados MariaDB:
+https://github.com/MylennaAlcantara/API_CRUD_Carros
+
 Bibliotecas utilizadas nesse projeto:
 Styled Components, React Router Dom
 
