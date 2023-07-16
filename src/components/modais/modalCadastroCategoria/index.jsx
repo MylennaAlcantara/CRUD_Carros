@@ -7,7 +7,7 @@ export const CadastroCategoria = ({close, pesquisarCategorias, dadosCategoria, s
     })
    
     async function salvar(){
-        const response = await fetch("http://10.0.1.107:8080/categoria",{
+        const response = await fetch("https://api-crud-carro.onrender.com/categoria",{
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify({categoria: dados.categoria})
@@ -22,7 +22,7 @@ export const CadastroCategoria = ({close, pesquisarCategorias, dadosCategoria, s
         })
     }
     async function editar(){
-        const response = await fetch(`http://10.0.1.107:8080/categoria/${dadosCategoria.id}`,{
+        const response = await fetch(`https://api-crud-carro.onrender.com/categoria/${dadosCategoria.id}`,{
             method: "PUT",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify({categoria: dados.categoria})
