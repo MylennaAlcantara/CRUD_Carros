@@ -12,7 +12,7 @@ export const CadastroCarro = ({close, pesquisarModelos, dadosCarro, setDadosCarr
 
     useEffect(()=>{
         async function FetchCategoria(){
-            const response = await fetch("http://api-crud-carro.onrender.com/categoria")
+            const response = await fetch("https://api-crud-carro.onrender.com/categoria")
             const data = await response.json();
             setCategorias(data);
         }
@@ -29,7 +29,7 @@ export const CadastroCarro = ({close, pesquisarModelos, dadosCarro, setDadosCarr
     }
     console.log(dados)
     async function salvar(){
-        const response = await fetch("http://api-crud-carro.onrender.com/modelo",{
+        const response = await fetch("https://api-crud-carro.onrender.com/modelo",{
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(dados)
@@ -45,7 +45,7 @@ export const CadastroCarro = ({close, pesquisarModelos, dadosCarro, setDadosCarr
     }
 
     async function editar(){
-        const response = await fetch(`http://api-crud-carro.onrender.com/modelo/${dadosCarro.id}`,{
+        const response = await fetch(`https://api-crud-carro.onrender.com/modelo/${dadosCarro.id}`,{
             method: "PUT",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(dados)
