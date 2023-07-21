@@ -49,7 +49,7 @@ export const ListaCategoriasCarro = ()=>{
         if(!dadosCategoria.id){
             alert("Nenhuma linha selecionada!")
         }else{
-            const response = await fetch(`http://10.0.1.107:8080/categoria/${dadosCategoria.id}`,{
+            const response = await fetch(`https://api-crud-carro.onrender.com/categoria/${dadosCategoria.id}`,{
                 method: "DELETE",
             })
             .then((response)=>{
@@ -63,7 +63,7 @@ export const ListaCategoriasCarro = ()=>{
     }
 
     async function FetchCarros(){
-        const response = await fetch("http://10.0.1.107:8080/categoria");
+        const response = await fetch("https://api-crud-carro.onrender.com/categoria");
         const data = await response.json();
         setLista(data);
     }
