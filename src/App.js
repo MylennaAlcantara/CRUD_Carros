@@ -3,14 +3,16 @@ import './App.css';
 import { Header } from './components/Header/index';
 import { ListaCarros } from './components/Pages/listaCarros';
 import { ListaCategoriasCarro } from './components/Pages/listaCategorias';
+import { Login } from './components/Pages/login';
 
 function App() {
 
   return (
     <div className="App">
-      <Header/>
+      {Login ? null : <Header/>}
         <Routes>
-          <Route Component={ListaCarros} path='/'/>
+          <Route Component={Login} path="/"/>
+          <Route Component={ListaCarros} path='/modelos'/>
           <Route Component={ListaCategoriasCarro} path='/categoriasDeCarros'/>
         </Routes>
     </div>
