@@ -6,10 +6,10 @@ import { ListaCategoriasCarro } from './components/Pages/listaCategorias';
 import { Login } from './components/Pages/login';
 
 function App() {
-
+  const token = localStorage.getItem("token");
   return (
     <div className="App">
-      {Login ? null : <Header/>}
+        {token != null ? <Header/> :null}
         <Routes>
           <Route Component={Login} path="/"/>
           <Route Component={ListaCarros} path='/modelos'/>

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import * as L from "./carros";
 import { CadastroCarro } from "../../modais/modalCadastro";
+import { useNavigate } from "react-router-dom";
+import { Footer } from "../../footer";
 
 export const ListaCarros = ()=>{
+    const navigate = useNavigate();
     const [lista, setLista] = useState([]);
     const [isModelCadastro, setIsModelCadastro] = useState(false);
     const [modeloSelecionado, setModeloSelecionado] = useState();
@@ -76,9 +79,21 @@ export const ListaCarros = ()=>{
     }
 
     async function FetchCarros(){
-        const response = await fetch("https://api-crud-carro.onrender.com/modelo");
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:8080/modelo",{//"https://api-crud-carro.onrender.com/modelo",{
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(token)}`,
+            },
+        })
         const data = await response.json();
-        setLista(data.list);
+        if(response.status === 401){
+            alert("Realize o login para ter acesso ao conteudo!"+"\n Será direcionado para a pagina de login!" );
+            navigate("/");
+            localStorage.removeItem("token");
+        }else{
+            setLista(data.list);
+        }
     }
     useEffect(()=>{
         FetchCarros();
@@ -99,7 +114,7 @@ export const ListaCarros = ()=>{
                         </tr>
                     </thead>
                     <tbody>
-                        {lista.length ? lista.map((item, index)=> {
+                        {lista ? lista.map((item, index)=> {
                             return(
                                 <tr key={item.id} 
                                 onClick={selecionarModelo.bind(this, item, index)} 
@@ -121,6 +136,7 @@ export const ListaCarros = ()=>{
                 <button onClick={excluir}>Excluir</button>
             </div>
             {isModelCadastro ? <CadastroCarro close={()=> setIsModelCadastro(false)} pesquisarModelos={FetchCarros} dadosCarro={dadosCarro} setDadosCarro={setDadosCarro} setModeloSelecionado={setModeloSelecionado}/> : null}
+            <Footer/>
         </L.Container>
     )
 }

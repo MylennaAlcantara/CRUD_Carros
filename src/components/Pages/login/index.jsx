@@ -17,7 +17,7 @@ export const Login =() =>{
 
     async function login (){
         try {
-            const resp = await fetch("http://10.0.1.107:8080/auth/login", {
+            const resp = await fetch("http://localhost:8080/auth/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,8 +30,10 @@ export const Login =() =>{
             }
     
             const data = await resp.json();
-            localStorage.setItem("token", data.acess_token);
-            navigate("/modelos")
+            if(data){
+                localStorage.setItem("token", JSON.stringify(data.access_token));
+                navigate("/modelos");
+            }
         } catch (erro) {
             console.error('Ocorreu um erro:', erro);
         }

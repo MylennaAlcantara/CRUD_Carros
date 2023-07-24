@@ -8,7 +8,7 @@ export const Header = () =>{
         <H.Container>
             <h1>Crud de Carros</h1>
             <H.Menu>
-                <button onClick={()=> navigate("/")}>Lista de Carros</button>
+                <button onClick={()=> navigate("/modelos")}>Lista de Carros</button>
                 <button onClick={()=> navigate("/categoriasDeCarros")}>Lista de Categorias</button>
             </H.Menu>
         </H.Container>

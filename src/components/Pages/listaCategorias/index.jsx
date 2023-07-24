@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import * as L from "./categorias";
 import { CadastroCategoria } from "../../modais/modalCadastroCategoria";
+import { useNavigate } from "react-router-dom";
 
 export const ListaCategoriasCarro = ()=>{
+    const navigate = useNavigate();
     const [lista, setLista] = useState([]);
     const [isModelCadastro, setIsModelCadastro] = useState(false);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState();
@@ -63,9 +65,21 @@ export const ListaCategoriasCarro = ()=>{
     }
 
     async function FetchCarros(){
-        const response = await fetch("https://api-crud-carro.onrender.com/categoria");
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:8080/categoria",{//"https://api-crud-carro.onrender.com/categoria",{
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(token)}`,
+            },
+        });
         const data = await response.json();
-        setLista(data);
+        if(response.status === 401){
+            alert("Realize o login para ter acesso ao conteudo!"+"/n Será direcionado para a pagina de login!" );
+            navigate("/");
+            localStorage.removeItem("token");
+        }else{
+            setLista(data);
+        }
     }
     useEffect(()=>{
         FetchCarros();
