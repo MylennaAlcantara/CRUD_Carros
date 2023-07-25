@@ -11,6 +11,7 @@ export const Container = styled.div`
     justify-content: space-around;
     position: sticky;
     top: 0;
+    z-index: 1;
     @media(max-width: 480px){
         justify-content: space-between;
     }

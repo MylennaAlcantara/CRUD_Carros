@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as L from "./login";
 import { useNavigate } from "react-router-dom";
 
 export const Login =() =>{
+    const [mensagem, setMensagem] = useState(false);
     const navigate = useNavigate();
     const [cadastro, setCadastro] = useState(false);
     const [dadosCadastro, setDadosCadastro] = useState({
@@ -15,9 +16,13 @@ export const Login =() =>{
         senha: ""
     });
 
+    useEffect(()=>{
+        localStorage.clear();
+    },[]);
     async function login (){
+        setMensagem(false);
         try {
-            const resp = await fetch("http://localhost:8080/auth/login", {
+            const resp = await fetch("https://api-crud-carro.onrender.com/auth/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,6 +31,7 @@ export const Login =() =>{
             });
     
             if (!resp.ok) {
+                setMensagem(true);
                 throw new Error('Falha na requisição.');
             }
     
@@ -68,6 +74,11 @@ export const Login =() =>{
                 </div>
             </L.Mensagem>
             <L.Login>
+                {mensagem ? (
+                    <div className="mensagem">
+                        Email e/ou senha invalido!
+                    </div>
+                ):null}
                 {cadastro ? (
                     <>
                     <h3>Cadastre-se</h3>

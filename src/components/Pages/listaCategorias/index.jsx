@@ -6,7 +6,10 @@ import { Footer } from "../../footer";
 import { Alerta } from "../../alerta";
 
 export const ListaCategoriasCarro = ()=>{
-    const [mensagem, setMensagem] = useState(false)
+    const navigate = useNavigate();
+    const [mensagem, setMensagem] = useState(false);
+    const [alerta, setAlerta] = useState("");
+    const [botao, setBotao] = useState("");
     const [lista, setLista] = useState([]);
     const [isModelCadastro, setIsModelCadastro] = useState(false);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState();
@@ -44,21 +47,27 @@ export const ListaCategoriasCarro = ()=>{
         if(categoriaSelecionada){
             setIsModelCadastro(true);
         }else{
-            alert("Nenhuma linha selecionada!");
+            setMensagem(true);
+            setAlerta("Nenhuma linha selecionada!");
+            setBotao("OK");
             setCategoriaSelecionada();
         }
     }
 
     async function excluir(){
         if(!dadosCategoria.id){
-            alert("Nenhuma linha selecionada!")
+            setMensagem(true);
+            setAlerta("Nenhuma linha selecionada!");
+            setBotao("OK");
         }else{
             const response = await fetch(`https://api-crud-carro.onrender.com/categoria/${dadosCategoria.id}`,{
                 method: "DELETE",
             })
             .then((response)=>{
                 if(response.status != 500){
-                    alert("Excluido!");
+                    setMensagem(true);
+                    setAlerta("Excluido!");
+                    setBotao("OK");
                     FetchCarros();
                     setCategoriaSelecionada();
                 }
@@ -68,7 +77,7 @@ export const ListaCategoriasCarro = ()=>{
 
     async function FetchCarros(){
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:8080/categoria",{//"https://api-crud-carro.onrender.com/categoria",{
+        const response = await fetch("https://api-crud-carro.onrender.com/categoria",{//"https://api-crud-carro.onrender.com/categoria",{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${JSON.parse(token)}`,
@@ -77,6 +86,8 @@ export const ListaCategoriasCarro = ()=>{
         const data = await response.json();
         if(response.status === 401){
             setMensagem(true);
+            setAlerta("Usuário não está logado!" + "\nPor favor realize o login para continuar!");
+            setBotao("Login");
             localStorage.removeItem("token");
         }else{
             setLista(data);
@@ -86,6 +97,14 @@ export const ListaCategoriasCarro = ()=>{
         FetchCarros();
     },[])
 
+    function funcaoBotao (){
+        if(botao === "Login"){
+            navigate("/");
+            setMensagem(false);
+        }else{
+            setMensagem(false);
+        }
+    }
 
     return(
         <L.Container>
@@ -119,7 +138,7 @@ export const ListaCategoriasCarro = ()=>{
                 <button onClick={excluir}>Excluir</button>
             </div>
             {isModelCadastro ? <CadastroCategoria close={()=> setIsModelCadastro(false)} pesquisarCategorias={FetchCarros} dadosCategoria={dadosCategoria} setDadosCategoria={setDadosCategoria} setCategoriaSelecionada={setCategoriaSelecionada}/> : null}
-            {mensagem ? <Alerta/> : null}
+            {mensagem ? <Alerta mensagem ={alerta} botao={botao} funcaoBotao={funcaoBotao}/> : null}
             <Footer/>
         </L.Container>
     )

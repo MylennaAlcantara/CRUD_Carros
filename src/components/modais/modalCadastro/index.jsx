@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Modal } from "./modalCadastro";
+import { Alerta } from "../../alerta";
 
 export const CadastroCarro = ({close, pesquisarModelos, dadosCarro, setDadosCarro, setModeloSelecionado}) =>{
+    const [mensagem, setMensagem] = useState(false);
+    const [alerta, setAlerta] = useState("");
+    const [botao, setBotao] = useState("");
     const [dados, setDados] = useState(dadosCarro || {
         modelo: "",
         ano: "",
@@ -36,7 +40,9 @@ export const CadastroCarro = ({close, pesquisarModelos, dadosCarro, setDadosCarr
         })
         .then((response)=>{
             if(response.status == 201){
-                alert("salvou");
+                setMensagem(true);
+                setAlerta("Salvou!");
+                setBotao("OK");
                 close();
                 pesquisarModelos();
                 setModeloSelecionado();
@@ -52,7 +58,9 @@ export const CadastroCarro = ({close, pesquisarModelos, dadosCarro, setDadosCarr
         })
         .then((response)=>{
             if(response.status == 200 || response.status == 201){
-                alert("Editou!");
+                setMensagem(true);
+                setAlerta("Editou!");
+                setBotao("OK");
                 close();
                 pesquisarModelos();
                 setModeloSelecionado();
@@ -102,6 +110,7 @@ export const CadastroCarro = ({close, pesquisarModelos, dadosCarro, setDadosCarr
                     <button onClick={dadosCarro.length ? salvar : editar}>Salvar</button>
                     <button onClick={cancelar}>Cancelar</button>
                 </div>
+                {mensagem ? <Alerta mensagem ={alerta} botao={botao} funcaoBotao={()=> setMensagem(false)}/> : null}
             </Container>
         </Modal>
     )

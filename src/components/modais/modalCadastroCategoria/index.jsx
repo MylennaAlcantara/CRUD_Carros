@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Modal } from "./modalCadastro";
+import { Alerta } from "../../alerta";
 
 export const CadastroCategoria = ({close, pesquisarCategorias, dadosCategoria, setDadosCategoria, setCategoriaSelecionada}) =>{
+    const [alerta, setAlerta] = useState("");
+    const [botao, setBotao] = useState("");
+    const [mensagem, setMensagem] = useState(false);
     const [dados, setDados] = useState(dadosCategoria || {
         categoria: "",
     })
@@ -14,7 +18,9 @@ export const CadastroCategoria = ({close, pesquisarCategorias, dadosCategoria, s
         })
         .then((response)=>{
             if(response.status == 201){
-                alert("salvou");
+                setMensagem(true);
+                alerta("Salvou!");
+                setBotao("OK");
                 cancelar();
                 pesquisarCategorias();
                 setCategoriaSelecionada();
@@ -29,7 +35,9 @@ export const CadastroCategoria = ({close, pesquisarCategorias, dadosCategoria, s
         })
         .then((response)=>{
             if(response.status == 200){
-                alert("Editou!");
+                setMensagem(true);
+                alerta("Editou!");
+                setBotao("OK");
                 cancelar();
                 pesquisarCategorias();
                 setCategoriaSelecionada();
@@ -65,6 +73,7 @@ export const CadastroCategoria = ({close, pesquisarCategorias, dadosCategoria, s
                     <button onClick={dadosCategoria.length ? salvar : editar}>Salvar</button>
                     <button onClick={cancelar}>Cancelar</button>
                 </div>
+                {mensagem ? <Alerta mensagem ={alerta} botao={botao} funcaoBotao={()=> setMensagem(false)}/> : null}
             </Container>
         </Modal>
     )

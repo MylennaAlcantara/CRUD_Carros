@@ -107,4 +107,21 @@ export const Login = styled.div`
         background-color: #F4F7F8;
         border: 1px solid #F59A73;
     }
+    .mensagem{
+        position: fixed;
+        top: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+        height: 30px;
+        color: F4F7F8;
+        background-color: #f2dede;
+        border-radius: 10px;
+        animation: hide 2s 2s forwards;
+    }
+    @keyframes hide {
+        from { opacity: 1 }
+        to   { opacity: 0 }
+    }
 `
