@@ -2,8 +2,9 @@ import { styled } from "styled-components";
 
 export const container = styled.div`
     background-color: #4B9093;
-    position: fixed;
-    height: 10%;
+    position: relative;
+    margin-top: auto;
+    height: 20%;
     width: 100%;
     display: flex;
     flex-direction: column;

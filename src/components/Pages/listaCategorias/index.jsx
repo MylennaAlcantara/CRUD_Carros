@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import * as L from "./categorias";
 import { CadastroCategoria } from "../../modais/modalCadastroCategoria";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "../../footer";
+import { Alerta } from "../../alerta";
 
 export const ListaCategoriasCarro = ()=>{
-    const navigate = useNavigate();
+    const [mensagem, setMensagem] = useState(false)
     const [lista, setLista] = useState([]);
     const [isModelCadastro, setIsModelCadastro] = useState(false);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState();
@@ -74,8 +76,7 @@ export const ListaCategoriasCarro = ()=>{
         });
         const data = await response.json();
         if(response.status === 401){
-            alert("Realize o login para ter acesso ao conteudo!"+"/n Será direcionado para a pagina de login!" );
-            navigate("/");
+            setMensagem(true);
             localStorage.removeItem("token");
         }else{
             setLista(data);
@@ -118,6 +119,8 @@ export const ListaCategoriasCarro = ()=>{
                 <button onClick={excluir}>Excluir</button>
             </div>
             {isModelCadastro ? <CadastroCategoria close={()=> setIsModelCadastro(false)} pesquisarCategorias={FetchCarros} dadosCategoria={dadosCategoria} setDadosCategoria={setDadosCategoria} setCategoriaSelecionada={setCategoriaSelecionada}/> : null}
+            {mensagem ? <Alerta/> : null}
+            <Footer/>
         </L.Container>
     )
 }

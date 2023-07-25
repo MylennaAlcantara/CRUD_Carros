@@ -63,8 +63,8 @@ export const Login =() =>{
                 <p>Projeto realizado com JavaScript com a biblioteca React para o frontend, foi utilizado para o backend o Nodejs com o framework Nestjs, TypeORM para fazer a comunicação com o banco MySql utilizado.</p>
                 <div>
                     <a href='https://github.com/MylennaAlcantara'><button><img src="/images/github.png"/>GitHub</button></a>
-                    <a href='https://github.com/MylennaAlcantara/CRUD_Carros'><button><img src="/images/linkedin.png" style={{height: "15px", width: "15px", marginRight: "5px"}}/>LinkedIn</button></a>
-                    <a href='https://github.com/MylennaAlcantara/CRUD_Carros'><button><img src="/images/insta.png"/>Instagram</button></a>                    
+                    <a href='https://www.linkedin.com/in/mylenna-alcantara-6a239617b'><button><img src="/images/linkedin.png" style={{height: "15px", width: "15px", marginRight: "5px"}}/>LinkedIn</button></a>
+                    <a href='https://instagram.com/mylenna.alcantara?igshid=MzNlNGNkZWQ4Mg=='><button><img src="/images/insta.png"/>Instagram</button></a>                    
                 </div>
             </L.Mensagem>
             <L.Login>
