@@ -5,6 +5,9 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+    @media(max-width: 460px){
+        flex-direction: column;
+    }
 `
 
 export const Mensagem = styled.div`
@@ -43,6 +46,9 @@ export const Mensagem = styled.div`
         cursor: pointer;
         background-color: #F4F7F8;
         border: 1px solid #F59A73;
+    }
+    @media(max-width: 460px){
+        width: 100%;
     }
 `
 
@@ -123,5 +129,12 @@ export const Login = styled.div`
     @keyframes hide {
         from { opacity: 1 }
         to   { opacity: 0 }
+    }
+    @media(max-width: 460px){
+        width: 100%;
+        .mensagem{
+            top:60%;
+            width: 80%;
+        }
     }
 `

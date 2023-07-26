@@ -21,4 +21,7 @@ export const Mensagem = styled.div`
     height: 20%;
     width: 25%;
     border-radius: 10px;
+    @media(max-width: 460px){
+        width: 90%;
+    }
 `

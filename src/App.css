@@ -49,6 +49,38 @@
 
 @media(max-width: 480px){
   .table{
+    margin-top: 15px;
     width: 90%;
+    height: 60%;
+    text-align: center;
+    overflow:hidden;
+    border-collapse:collapse;
+    border: 1px solid grey;
+    border-radius: 15px;
+    background-color: #F4F7F8;
+    overflow: auto;
+  }
+  .table table{
+    width: 100%;
+  }
+  .table table td {
+      border-bottom: 1px solid grey;
+      border-right: 1px solid grey;
+  }
+  .table table th{
+    border-bottom: 1px solid #4B9093;
+  }
+  .table table tbody tr:nth-child(even) {
+    color: #F4F7F8;
+    background-color: #4B9093;
+  }
+  .table table tbody tr:nth-child(odd) {
+    color: #4B9093;
+    background-color: #F4F7F8;
+  }
+  .table table th{
+      color: white;
+      background-color: #F59A73;
+      text-align: center;
   }
 }

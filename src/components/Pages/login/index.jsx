@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as L from "./login";
 import { useNavigate } from "react-router-dom";
 
-export const Login =() =>{
+export const Login =({ setVisivel}) =>{
     const [mensagem, setMensagem] = useState(false);
     const navigate = useNavigate();
     const [cadastro, setCadastro] = useState(false);
@@ -17,6 +17,7 @@ export const Login =() =>{
     });
 
     useEffect(()=>{
+        setVisivel(false);
         localStorage.clear();
     },[]);
     async function login (){
@@ -46,12 +47,16 @@ export const Login =() =>{
     }
 
     async function cadastrar(){
-        fetch("http://10.0.1.107:8080/usuario/cadastrar", {
+        fetch("https://api-crud-carro.onrender.com/usuario/cadastro", {
             method: "POST",
             headers:{
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(dadosCadastro),
+            body: JSON.stringify({
+                nome: dadosCadastro.nome,
+                email: dadosCadastro.email,
+                senha: dadosCadastro.senha
+            }),
         })
         .then((resp)=>{
             if(resp.status === 201){

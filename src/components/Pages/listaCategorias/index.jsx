@@ -4,8 +4,9 @@ import { CadastroCategoria } from "../../modais/modalCadastroCategoria";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../../footer";
 import { Alerta } from "../../alerta";
+import { Header } from "../../Header";
 
-export const ListaCategoriasCarro = ()=>{
+export const ListaCategoriasCarro = ({setVisivel})=>{
     const navigate = useNavigate();
     const [mensagem, setMensagem] = useState(false);
     const [alerta, setAlerta] = useState("");
@@ -88,13 +89,14 @@ export const ListaCategoriasCarro = ()=>{
             setMensagem(true);
             setAlerta("Usuário não está logado!" + "\nPor favor realize o login para continuar!");
             setBotao("Login");
-            localStorage.removeItem("token");
+            localStorage.clear();
         }else{
             setLista(data);
         }
     }
     useEffect(()=>{
         FetchCarros();
+        setVisivel(true);
     },[])
 
     function funcaoBotao (){

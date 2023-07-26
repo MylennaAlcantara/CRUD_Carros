@@ -4,16 +4,18 @@ import { Header } from './components/Header/index';
 import { ListaCarros } from './components/Pages/listaCarros';
 import { ListaCategoriasCarro } from './components/Pages/listaCategorias';
 import { Login } from './components/Pages/login';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 function App() {
-  const token = localStorage.getItem("token");
+  const [visivel, setVisivel] = useState(false);
   return (
     <div className="App">
-        {token != null ? <Header/> :null}
+        {visivel ? <Header/> : null}
         <Routes>
-          <Route Component={Login} path="/"/>
-          <Route Component={ListaCarros} path='/modelos'/>
-          <Route Component={ListaCategoriasCarro} path='/categoriasDeCarros'/>
+          <Route element={<Login setVisivel={setVisivel}/>} path="/"/>
+          <Route element={<ListaCarros setVisivel={setVisivel}/>} path='/modelos'/>
+          <Route element={<ListaCategoriasCarro setVisivel={setVisivel}/>} path='/categoriasDeCarros'/>
         </Routes>
     </div>
   );

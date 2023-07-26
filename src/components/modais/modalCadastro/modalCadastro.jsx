@@ -66,6 +66,16 @@ export const Container = styled.div`
             background-color: #F4F7F8;
         }
     }
+    @media(max-width: 460px){
+        width: 90%;
+        select,
+        input{
+            width: 95%;
+        }
+        div{
+            align-items: end;
+        }
+    }
 `
 
 export const Modal = styled.div`
